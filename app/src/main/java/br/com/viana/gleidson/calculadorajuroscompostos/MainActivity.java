@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
                 lista.add(ganhoJuros);
 
                 if (i == T) {
-                    tvMensagemFinal.setText("Sua aposentadoria será de R$" + Double.valueOf(String.format(Locale.US, "%.2f", (lucroMes))) + " mensal");
+                    tvMensagemFinal.setText("Sua aposentadoria será de R$" + Double.valueOf(String.format(Locale.US, "%.2f", (lucroMes))) + " mensais");
                 }
                 valorInicial += lucroMes + depositoMensal;
             }

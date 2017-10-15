@@ -1,122 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="br.com.viana.gleidson.calculadorajuroscompostos.MainActivity">
 
-    <TextView
-        android:id="@+id/tvInicial"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="29dp"
-        android:layout_marginStart="29dp"
-        android:text="Inicial"
-        android:layout_alignBaseline="@+id/etInicial"
-        android:layout_alignBottom="@+id/etInicial"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/etInicial"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tvInicial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="Valor Inicial" />
+
+        <EditText
+            android:id="@+id/etInicial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="5"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:id="@+id/tvMensal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="Valor Mensal" />
+
+        <EditText
+            android:id="@+id/etFinal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="5"
+            android:inputType="numberDecimal" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="5"
-        android:inputType="numberDecimal"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/tvInicial"
-        android:layout_toEndOf="@+id/tvInicial"
-        android:layout_marginLeft="13dp"
-        android:layout_marginStart="13dp" />
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/etFinal"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tvTempo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="Tempo" />
+
+        <EditText
+            android:id="@+id/etTempo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="2"
+            android:inputType="number" />
+
+        <Switch
+            android:id="@+id/swTempo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:checked="false"
+            android:text="Meses"
+            android:textOff="Meses"
+            android:textOn="Anos" />
+
+        <TextView
+            android:id="@+id/tvJuros"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="Juros" />
+
+        <EditText
+            android:id="@+id/etJuros"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:ems="3"
+            android:inputType="numberDecimal" />
+
+        <Switch
+            android:id="@+id/swTempoJuros"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:checked="false"
+            android:text="Mensal"
+            android:textOff="Mensal"
+            android:textOn="Anual" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="5"
-        android:inputType="numberDecimal"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tvMensal"
-        android:layout_width="wrap_content"
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Mensal"
-        android:layout_alignBaseline="@+id/etFinal"
-        android:layout_alignBottom="@+id/etFinal"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="106dp"
-        android:layout_marginEnd="106dp" />
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/etTempo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tvInicial"
-        android:layout_marginTop="61dp"
-        android:ems="2"
-        android:inputType="number" />
-
-    <TextView
-        android:id="@+id/tvTempo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/etTempo"
-        android:text="Tempo" />
-
-    <Switch
-        android:id="@+id/swTempo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/etTempo"
-        android:layout_alignBottom="@+id/etTempo"
-        android:layout_toLeftOf="@+id/tvMensal"
-        android:layout_toStartOf="@+id/tvMensal"
-        android:checked="false"
-        android:text="Meses"
-        android:textOff="Meses"
-        android:textOn="Anos" />
-
-    <EditText
-        android:id="@+id/etJuros"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/etTempo"
-        android:ems="2"
-        android:inputType="numberDecimal"
-        android:layout_alignLeft="@+id/tvMensal"
-        android:layout_alignStart="@+id/tvMensal" />
-
-    <TextView
-        android:id="@+id/tvJuros"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Juros"
-        android:layout_below="@+id/etJuros"
-        android:layout_alignLeft="@+id/etJuros"
-        android:layout_alignStart="@+id/etJuros" />
-
-    <Switch
-        android:id="@+id/swTempoJuros"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/swTempo"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_toEndOf="@+id/tvMensal"
-        android:layout_toRightOf="@+id/tvMensal"
-        android:checked="false"
-        android:text="Mensal"
-        android:textOff="Mensal"
-        android:textOn="Anual" />
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Calcular" />
+    </LinearLayout>
 
 
-</RelativeLayout>
+</LinearLayout>

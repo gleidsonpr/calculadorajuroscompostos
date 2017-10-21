@@ -1,18 +1,25 @@
 package br.com.viana.gleidson.calculadorajuroscompostos;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -157,6 +164,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private  void exibirInfo(GanhoJuros ganho) {
+        AlertDialog alerta;
+
+        LayoutInflater li = getLayoutInflater();
+        View view = li.inflate(R.layout.info, null);
+        final TextView tvValorAtualI =(TextView) view.findViewById(R.id.tvValorAtualI);
+        tvValorAtualI.setText("R$"+ganho.getValoratual());
+
+        final TextView tvMesI =(TextView) view.findViewById(R.id.tvMesI);
+        tvMesI.setText(obterNomeMes(ganho.getMesdata().get(Calendar.MONTH))+"/"+ganho.getMesdata().get(Calendar.YEAR));
+
+        final TextView tvValorGanhoJurosI =(TextView) view.findViewById(R.id.tvValorGanhoJurosI);
+        tvValorGanhoJurosI.setText("R$"+ganho.getValorganho());
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(" ");
+        builder.setView(view);
+
+        builder.setPositiveButton("Fechar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+
+            }
+        });
+
+        alerta = builder.create();
+        alerta.show();
+    }
+    public String obterNomeMes(int mes){
+        String[] meses = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",
+                "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"};
+        return meses[mes];
+    }
     public  void CalcularJuros(){
         final EditText etInicial =(EditText)findViewById(R.id.etInicial);
         final EditText etMensal =(EditText)findViewById(R.id.etMensal);
@@ -166,7 +204,8 @@ public class MainActivity extends AppCompatActivity {
 
         final TextView tvMensagemFinal =(TextView) findViewById(R.id.tvMensagemFinal);
         tvMensagemFinal.setText("");
-
+        final TextView tvMensagemFinalAcumulado =(TextView) findViewById(R.id.tvMensagemFinalAcumulado);
+        tvMensagemFinalAcumulado.setText("");
 
         final Switch swTempo = (Switch) findViewById(R.id.swTempo);
         final Switch swTempoJuros = (Switch) findViewById(R.id.swTempoJuros);
@@ -201,6 +240,7 @@ public class MainActivity extends AppCompatActivity {
             double txJuro = I;
             double lucroMes = 0;
 
+
             for (int i = 1; i <= T; i++) {
 
                 lucroMes = valorInicial * txJuro;
@@ -208,16 +248,32 @@ public class MainActivity extends AppCompatActivity {
                 ganhoJuros.setValoratual("" + Double.valueOf(String.format(Locale.US, "%.2f", valorInicial)));
                 ganhoJuros.setValorganho("" + Double.valueOf(String.format(Locale.US, "%.2f", (lucroMes))));
                 ganhoJuros.setMesatual("" + i);
+
+                Calendar dataDaAplicacao = Calendar.getInstance();
+                dataDaAplicacao.add(Calendar.MONTH,i);
+                    ganhoJuros.setMesdata(dataDaAplicacao);
+
                 lista.add(ganhoJuros);
 
                 if (i == T) {
-                    tvMensagemFinal.setText("Sua aposentadoria será de R$" + Double.valueOf(String.format(Locale.US, "%.2f", (lucroMes))) + " mensais");
+                    tvMensagemFinal.setText("Rentabilidade mensal no final: R$" + Double.valueOf(String.format(Locale.US, "%.2f", (lucroMes))));
+                    tvMensagemFinalAcumulado.setText("Acumulado: R$" + Double.valueOf(String.format(Locale.US, "%.2f", (valorInicial + lucroMes + depositoMensal))));
                 }
                 valorInicial += lucroMes + depositoMensal;
             }
             ListaAdapterGanhoJuros adapterPiada = new ListaAdapterGanhoJuros(this, lista);
             ListView listView = (ListView) findViewById(R.id.lvGanho);
             listView.setAdapter(adapterPiada);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    GanhoJuros ganho= lista.get(position);
+                    exibirInfo(ganho);
+
+                }
+            });
 
         }
         else{

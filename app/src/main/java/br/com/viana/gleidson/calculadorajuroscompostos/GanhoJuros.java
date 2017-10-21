@@ -1,5 +1,8 @@
 package br.com.viana.gleidson.calculadorajuroscompostos;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created by gleidson on 14/10/2017.
  */
@@ -8,6 +11,7 @@ public class GanhoJuros {
     private String valorganho;
     private String valoratual;
     private String mesatual;
+    private Calendar Mesdata;
 
 
 
@@ -15,6 +19,13 @@ public class GanhoJuros {
 
     }
 
+    public Calendar getMesdata() {
+        return Mesdata;
+    }
+
+    public void setMesdata(Calendar mesdata) {
+        Mesdata = mesdata;
+    }
 
     public String getValorganho() {
         return valorganho;
